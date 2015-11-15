@@ -2,4 +2,4 @@ language: node_js
 
 # version numbers, testing against two versions of node
 node_js:
-  - "0.10.31"
+  - "v0.10.18"
