@@ -5,7 +5,7 @@
 </head>
 <body>
   
-  <form action="hacerClick" method="post">
+  <form action="lib/hacerClick" method="post">
   Nombre Empresa:
   <input type="text" id="number1" name="numero1" size="10" value="patito"><br>
   Tipo Empresa:
@@ -15,7 +15,7 @@
  <form action="verLista" method="post">
  <input type="submit" value="Listar calificaciones de empresa">
 </form>
-<form action="verLista" method="post">
+<form action="verRanking" method="post">
  <input type="submit" value="Ver ranking">
 </form>
 <form action="crearCalificacion" method="post">
