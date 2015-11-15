@@ -11,6 +11,29 @@
   <div id="container">
     <div id="background"></div>
     
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="server.html">
+                  server.js
+                </a>
+              
+                
+                <a class="source" href="Gruntfile.html">
+                  Gruntfile.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
     <ul class="sections">
         
           <li id="title">
@@ -27,12 +50,10 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>importar</p>
-
+              
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
-<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div></div>
             
         </li>
         
@@ -43,13 +64,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>instanciar</p>
+              <p>importar</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> app = express();
-<span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
-<span class="hljs-keyword">var</span> info=<span class="hljs-string">''</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</pre></div></div>
             
         </li>
         
@@ -60,11 +80,19 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>especificamos el subdirectorio donde se encuentran las páginas estáticas</p>
+              <p>instanciar</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>app.use(express.static(__dirname + <span class="hljs-string">'/public'</span>));</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> app = express();
+<span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
+<span class="hljs-keyword">var</span> info=<span class="hljs-string">''</span>;
+
+<span class="hljs-keyword">var</span> sqlite3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sqlite3'</span>).verbose();
+
+<span class="hljs-keyword">var</span> start = <span class="hljs-built_in">Date</span>.now();
+	
+<span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> sqlite3.Database(<span class="hljs-string">'./myDataBase.db'</span>);</pre></div></div>
             
         </li>
         
@@ -75,11 +103,28 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
+              <p>especificamos el subdirectorio donde se encuentran las páginas estáticas</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.use(express.static(__dirname + <span class="hljs-string">'/public'</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
               <p>extended: false significa que parsea solo string (no archivos de imagenes por ejemplo)</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>app.use(bodyParser.urlencoded({ extended: <span class="hljs-literal">false</span> }));
+
+<span class="hljs-keyword">var</span> moduloPrueba={};
 
 app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
  	<span class="hljs-keyword">var</span> pagina=<span class="hljs-string">'&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>;
@@ -92,42 +137,81 @@ app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span 
         </li>
         
         
-        <li id="section-5">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>method: hacerClick 
 action: Se encarga de insertar una nueva empresa en la base de datos.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
+            <div class="content"><div class='highlight'><pre>moduloPrueba.comprobacion= <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nombre1,res</span>)</span>{
+	
+	<span class="hljs-keyword">var</span> result =<span class="hljs-literal">false</span>;
+	
+	<span class="hljs-keyword">var</span> dato=[];
+	db.serialize(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+	 db.all(<span class="hljs-string">"SELECT nombre  from empresa where nombre='"</span>+nombre1+<span class="hljs-string">"'"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err,row</span>)</span>{
+		dato.push({nom:row.nombre});		
+		<span class="hljs-built_in">console</span>.log(row.nombre);
+		<span class="hljs-keyword">if</span>(row.length==<span class="hljs-number">0</span>){
+			res(<span class="hljs-literal">null</span>,<span class="hljs-literal">false</span>);
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Entro en false"</span>);
+		}
+		<span class="hljs-keyword">else</span>{
+			res(<span class="hljs-literal">null</span>,<span class="hljs-literal">true</span>);
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Entro en true"</span>);
+		}
+		});
+	
+});
+}	
+ 
+moduloPrueba.insertarEmpresa=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nombre,valor</span>)</span>{
+	db.run(<span class="hljs-string">"Insert into empresa values(?,?2)"</span>,{<span class="hljs-number">1</span>:nombre,<span class="hljs-number">2</span>:valor});
+}
+  
 app.post(<span class="hljs-string">'/hacerClick'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req,res</span>)</span>{
 	<span class="hljs-keyword">var</span> data1 =req.body.numero1;
 	<span class="hljs-keyword">var</span> data2 =req.body.numero2;
 	<span class="hljs-keyword">var</span> num1 =<span class="hljs-built_in">parseInt</span>(data2);
-
-	<span class="hljs-keyword">var</span> sqlite3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sqlite3'</span>).verbose();
-
-	<span class="hljs-keyword">var</span> start = <span class="hljs-built_in">Date</span>.now();
-	<span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> sqlite3.Database(<span class="hljs-string">'./myDataBase.db'</span>);
-	 db.run(<span class="hljs-string">"Insert into empresa values(?,?5)"</span>, {
-          <span class="hljs-number">1</span>: data1,
-          <span class="hljs-number">5</span>: num1
-      });
-	db.close()
+	result=<span class="hljs-literal">true</span>;
+	comprobacion(data1,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err,resultado</span>)</span>{
+		<span class="hljs-keyword">if</span>(!resultado){
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Insertando"</span>);
+			insertarEmpresa(data1,num1);
+			<span class="hljs-keyword">var</span> pagina=<span class="hljs-string">'&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>;
+     	 		pagina +=<span class="hljs-string">'&lt;p&gt; Empresa creada.&lt;/p&gt;'</span>;
+        		 pagina += <span class="hljs-string">'&lt;a href="Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
+         		pagina += <span class="hljs-string">'&lt;/body&gt;&lt;/html&gt;'</span>;
+         		res.send(pagina);
+			
+		}
+		<span class="hljs-keyword">else</span>{
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"No insertado"</span>);
+			<span class="hljs-keyword">var</span> pagina=<span class="hljs-string">'&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>;
+     	 		pagina +=<span class="hljs-string">'&lt;p&gt; Empresa existente en bd.&lt;/p&gt;'</span>;
+        		 pagina += <span class="hljs-string">'&lt;a href="Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
+         		pagina += <span class="hljs-string">'&lt;/body&gt;&lt;/html&gt;'</span>;
+         		res.send(pagina);
+		}
+	});
+	
+	
+	
 });</pre></div></div>
             
         </li>
         
         
-        <li id="section-6">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>method: crearClificación
 action: Se encarga de crear una calificación para un alumno dentro de una empresa específica.</p>
@@ -194,11 +278,11 @@ app.post(<span class="hljs-string">'/nuevaCali'</span>,<span class="hljs-functio
         </li>
         
         
-        <li id="section-7">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>method:borrar
 action: Se encarga de borrar una calificación de una empresa introduciendo previamente el nombre del alumno y la empresa.</p>
@@ -263,11 +347,11 @@ app.post(<span class="hljs-string">'/elimina'</span>,<span class="hljs-function"
         </li>
         
         
-        <li id="section-8">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>method: verRanking
 action: Se encarga de mostrar en la aplicación web un ranking de empresas por media.</p>
@@ -286,8 +370,8 @@ app.post(<span class="hljs-string">'/verRanking'</span>,<span class="hljs-functi
 	res.write(<span class="hljs-string">'&lt;table&gt;  &lt;tr&gt; &lt;th&gt;Empresa&lt;/th&gt; &lt;th&gt;Media&lt;/th&gt; &lt;/tr&gt;'</span>)
 	db.serialize(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
 	
-			db.each(<span class="hljs-string">"SELECT nombre1, AVG(calificacion) AS media FROM calificaciones "</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, row</span>) </span>{
-				info+=<span class="hljs-string">'&lt;tr&gt;&lt;td&gt;'</span>+row.nombre1+<span class="hljs-string">'&lt;/td&gt;&lt;td&gt;'</span>+row.media+<span class="hljs-string">'&lt;/td&gt;&lt;/tr&gt;'</span>;
+			db.each(<span class="hljs-string">"select distinct nombre1, (SELECT AVG(calificacion) from calificaciones B where A.nombre1 = B.nombre1) AS med FROM calificaciones A where med&gt;=0 ORDER BY med DESC "</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, row</span>) </span>{
+				info+=<span class="hljs-string">'&lt;tr&gt;&lt;td&gt;'</span>+row.nombre1+<span class="hljs-string">'&lt;/td&gt;&lt;td&gt;'</span>+row.med+<span class="hljs-string">'&lt;/td&gt;&lt;/tr&gt;'</span>;
 				
 		
 		
@@ -307,11 +391,11 @@ app.post(<span class="hljs-string">'/verRanking'</span>,<span class="hljs-functi
         </li>
         
         
-        <li id="section-9">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>method:verLIsta
 action:Método para llamar listar el conjunto de empresas.</p>
@@ -330,11 +414,11 @@ app.post(<span class="hljs-string">'/verLista'</span>,<span class="hljs-function
         </li>
         
         
-        <li id="section-10">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>method:listar
 action:Método para listar.</p>
@@ -383,18 +467,18 @@ db.close();
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>escuchar</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>app.listen(<span class="hljs-number">9000</span>);
- 
+<span class="hljs-built_in">module</span>.exports = moduloPrueba;
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Servidor Express escuchando en modo %s"</span>, app.settings.env);</pre></div></div>
             
         </li>
