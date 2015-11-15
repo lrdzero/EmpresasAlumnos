@@ -69,6 +69,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+
 <span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</pre></div></div>
             
         </li>
@@ -107,7 +108,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>app.use(express.static(__dirname + <span class="hljs-string">'/public'</span>));</pre></div></div>
+            <div class="content"><div class='highlight'><pre>app.use(express.static(__dirname + <span class="hljs-string">'/../public'</span>));</pre></div></div>
             
         </li>
         
@@ -129,7 +130,7 @@
 app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
  	<span class="hljs-keyword">var</span> pagina=<span class="hljs-string">'&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>;
       
-    pagina += <span class="hljs-string">'&lt;a href="Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
+    pagina += <span class="hljs-string">'&lt;a href="/Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
     pagina += <span class="hljs-string">'&lt;/body&gt;&lt;/html&gt;'</span>;
     res.send(pagina);
 });</pre></div></div>
@@ -173,19 +174,20 @@ action: Se encarga de insertar una nueva empresa en la base de datos.</p>
 moduloPrueba.insertarEmpresa=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nombre,valor</span>)</span>{
 	db.run(<span class="hljs-string">"Insert into empresa values(?,?2)"</span>,{<span class="hljs-number">1</span>:nombre,<span class="hljs-number">2</span>:valor});
 }
+
   
 app.post(<span class="hljs-string">'/hacerClick'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req,res</span>)</span>{
 	<span class="hljs-keyword">var</span> data1 =req.body.numero1;
 	<span class="hljs-keyword">var</span> data2 =req.body.numero2;
 	<span class="hljs-keyword">var</span> num1 =<span class="hljs-built_in">parseInt</span>(data2);
-	result=<span class="hljs-literal">true</span>;
-	comprobacion(data1,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err,resultado</span>)</span>{
+	
+	moduloPrueba.comprobacion(data1,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err,resultado</span>)</span>{
 		<span class="hljs-keyword">if</span>(!resultado){
 			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Insertando"</span>);
-			insertarEmpresa(data1,num1);
+			moduloPrueba.insertarEmpresa(data1,num1);
 			<span class="hljs-keyword">var</span> pagina=<span class="hljs-string">'&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'</span>;
      	 		pagina +=<span class="hljs-string">'&lt;p&gt; Empresa creada.&lt;/p&gt;'</span>;
-        		 pagina += <span class="hljs-string">'&lt;a href="Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
+        		 pagina += <span class="hljs-string">'&lt;a href="/Empresa.html"&gt;Retornar&lt;/a&gt;'</span>;
          		pagina += <span class="hljs-string">'&lt;/body&gt;&lt;/html&gt;'</span>;
          		res.send(pagina);
 			
