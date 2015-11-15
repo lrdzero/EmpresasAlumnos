@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario</title>
+</head>
+<body>
+  
+  <form action="hacerClick" method="post">
+  Nombre Empresa:
+  <input type="text" id="number1" name="numero1" size="10" value="patito"><br>
+  Tipo Empresa:
+  <input type="text" id="number2" name="numero2" size="10"><br>
+  <input type="submit" value="Crear">
+</form>
+ <form action="verLista" method="post">
+ <input type="submit" value="Listar calificaciones de empresa">
+</form>
+<form action="verLista" method="post">
+ <input type="submit" value="Ver ranking">
+</form>
+<form action="crearCalificacion" method="post">
+	<input type="submit" value="Insertar Calificación Alumno">
+</form>
+<form action="borrar" method="post">
+ <input type="submit" value="Borrar Calificación Alumno">
+</form>
+</body>
+</html>
+
+</script>
+ 
+<body>
+
+</body>
+</html>
